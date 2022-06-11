@@ -1,0 +1,34 @@
+double find(double low,double high,double m[],int n)
+    { 
+       
+        while(low<=high)
+        {   
+            double force=0;
+            
+             double mid=(low+high)/2;
+             for(int i=0;i<n;i++)
+             { 
+                 force=force+1/(mid-m[i]);
+                 
+             }
+             if(abs(force)<0.000000001)
+             return mid;
+             else if(force<0)
+             high=mid;
+             else 
+             low=mid;
+            // cout<<mid<<endl;
+            
+        }
+        return low;
+    }
+        void nullPoints(int n, double magnets[], double getAnswer[])
+    {  
+        for(int i=0;i<n-1;i++)
+        { 
+             getAnswer[i]=find(magnets[i],magnets[i+1],magnets,n);
+        }
+        
+        // Your code goes here   
+    }
+
