@@ -1,0 +1,27 @@
+int find(string str,int index,int sum,vector<vector<int>>&v)
+	{ 
+	    if(index==str.length())
+	    return 1;
+	    if(v[index][sum]!=-1)
+	    return v[index][sum];
+	    int cur=0;
+	    int ans=0;
+	    for(int i=index;i<str.length();i++)
+	    { 
+	         cur=cur+str[i]-'0';
+	         if(cur>=sum)
+	         ans=ans+find(str,i+1,cur,v);
+	         
+	    }
+	    return v[index][sum]=ans;
+	    
+	}
+	int TotalCount(string str){ 
+	    int n=str.length();
+	    vector<vector<int>>v(n,vector<int>(n*9,-1));
+	    int ans=find(str,0,0,v);
+	    return ans;
+	    
+	    
+	    // Code here
+	}
