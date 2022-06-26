@@ -1,0 +1,39 @@
+Input: cardPoints = [1,2,3,4,5,6,1], k = 3
+Output: 12
+Explanation: After the first step, your score will always be 1. However, choosing the rightmost card first will maximize your total score. The optimal strategy is to take the three cards on the right, giving a final score of 1 + 6 + 5 = 12. 
+int maxScore(vector<int>& arr, int k) { 
+        int totalsum=0;
+        int ans=0;
+        int n=arr.size();
+        for(int i=0;i<n;i++)
+        { 
+            totalsum=totalsum+arr[i];
+        }
+        if(k==n)
+            return totalsum;
+        int m=n-k;
+        queue<int>q;
+        cout<<"totalsum"<<totalsum<<endl;
+        for(int i=0;i<m;i++)
+        { 
+            q.push(arr[i]);
+            totalsum=totalsum-arr[i];
+            
+        }
+        for(int i=m;i<n;i++)
+        { 
+            cout<<totalsum<<" "<<arr[i]<<endl;
+            if(totalsum>ans)
+                ans=totalsum;
+            int y=q.front();
+            q.pop();
+            totalsum=totalsum+y-arr[i];
+            q.push(arr[i]);
+            
+            
+        }
+        if(totalsum>ans)
+            ans=totalsum;
+        return ans;
+        
+    }
