@@ -1,0 +1,74 @@
+Example 1:
+
+Input: s = "aab"
+Output: 0
+Explanation: s is already good.
+Example 2:
+
+Input: s = "aaabbbcc"
+Output: 2
+Explanation: You can delete two 'b's resulting in the good string "aaabcc".
+Another way it to delete one 'b' and one 'c' resulting in the good string "aaabbc".
+Example 3:
+
+Input: s = "ceabaacb"
+Output: 2
+Explanation: You can delete both 'c's resulting in the good string "eabaab".
+Note that we only care about characters that are still in the string at the end (i.e. frequency of 0 is ignored).
+
+int minDeletions(string s) {  
+        unordered_map<char,int>m;
+        for(int i=0;i<s.length();i++)
+            m[s[i]]++;
+        
+        map<int,int>m1;
+        int ma=0;
+        for(auto it:m)
+        { 
+            m1[it.second]++;
+            if(it.second>ma)
+                ma=it.second;
+           
+            
+        }
+        vector<int>v(ma+1,0);
+        int ans=0;
+        for(auto it: m1)
+            v[it.first]=1;
+        for(auto it:m1)
+        {
+            cout<<it.first<<" "<<it.second<<endl;
+            if(it.second>1)
+            { 
+                int num=it.first;
+                int y=it.first;
+                while(it.second>1)
+                {
+                    int f=0;
+                for(int i=y-1;i>=1;i--)
+                {
+                    if(v[i]==0)
+                    { 
+                        ans=ans+it.first-i;
+                        v[i]=1;
+                        it.second--;
+                        f=1;
+                        break;
+                       // f=1;
+                        
+                    }
+                }
+                    if(f==0)
+                    { 
+                        ans=ans+y;
+                        it.second--;
+                    }
+                    
+                }
+            }
+            
+        }
+        return ans;
+        
+        
+    }
